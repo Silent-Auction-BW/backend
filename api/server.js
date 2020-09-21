@@ -12,5 +12,7 @@ server.use(express.json());
 
 
 server.use('/', authRouter)
+server.use('/', itemsRouter)
+
 
 module.exports = server;
