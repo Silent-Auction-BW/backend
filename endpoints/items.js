@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
-
-const db = require('./item-model')
+const db = require('../models/items-model')
 
 router.get("/items", async (req, res, next) =>{
     try{
