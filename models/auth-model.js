@@ -17,17 +17,6 @@ async function add(user) {
 }
 
 
-function find() {
-	const bidders =  db("bidders").select("id", "name")
-	const sellers =  db("sellers").select("id", "name")
-
-	if (!bidders){
-		return sellers
-	}
-	else {
-		return bidders
-	}
-}
 
 async function findBy(filter) {
         
@@ -74,7 +63,6 @@ async function findById(bidder_id, seller_id, role) {
 
 module.exports = {
 	add,
-	find,
 	findBy,
 	findById,
 }
