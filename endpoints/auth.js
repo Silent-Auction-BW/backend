@@ -6,10 +6,10 @@ const Users = require('../models/auth-model')
 
 router.post('/register', async (req, res, next) => {
     try{
-        const {name} = req.body
-        const username = await Users.findBy({name})
+        const {username} = req.body
+        const name = await Users.findBy({username})
   
-        if (username){
+        if (name){
           return res.status(409).json({
               message: "User is already taken"
           })
@@ -25,8 +25,8 @@ router.post('/register', async (req, res, next) => {
 
 router.post("/login", async (req, res, next) => {
 	try {
-		const { name, password } = req.body
-		const user = await Users.findBy({ name })
+		const { username, password } = req.body
+		const user = await Users.findBy({ username })
 		
 		if (!user) {
 			return res.status(401).json({
@@ -36,7 +36,7 @@ router.post("/login", async (req, res, next) => {
 		
 
 		res.json({
-			message: `Welcome ${user.name}!`,
+			message: `Welcome ${user.username}!`,
 		})
 	} catch(err) {
 		next(err)
