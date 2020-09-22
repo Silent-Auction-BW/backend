@@ -4,5 +4,5 @@ module.exports = {
     connection: {
         filename: "./database/auction.db3", 
     },
-
+    
 }
