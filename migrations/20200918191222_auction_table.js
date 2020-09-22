@@ -15,6 +15,7 @@ exports.up = async function(knex) {
         table.increments("item_id")
         table.integer("seller_id").notNullable().references("seller_id").inTable("sellers").onDelete("CASCADE").onUpdate("CASCADE")
         table.string("name").notNullable()
+        table.string("seller_name").notNullable()
         table.string("description").notNullable()
         table.integer("price").notNullable()
         table.string("image_url")
