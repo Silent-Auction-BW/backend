@@ -3,6 +3,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 const authRouter = require('../endpoints/auth');
 const itemsRouter = require('../endpoints/items');
+const sellersRouter = require('../endpoints/seller');
 
 const server = express();
 
@@ -13,6 +14,6 @@ server.use(express.json());
 
 server.use('/', authRouter)
 server.use('/', itemsRouter)
-
+server.use('/', sellersRouter)
 
 module.exports = server;
