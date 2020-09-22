@@ -25,7 +25,7 @@ router.post('/register', async (req, res, next) => {
 
 router.post("/login", async (req, res, next) => {
 	try {
-		const { username, password } = req.body
+		const { username, password, role } = req.body
 		const user = await Users.findBy({ username })
 		
 		if (!user) {
@@ -36,7 +36,7 @@ router.post("/login", async (req, res, next) => {
 		
 
 		res.json({
-			message: `Welcome ${user.username}!`,
+			message: `Welcome ${user.username} you role is ${user.role}! `,
 		})
 	} catch(err) {
 		next(err)
