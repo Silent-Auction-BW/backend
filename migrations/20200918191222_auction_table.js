@@ -18,7 +18,7 @@ exports.up = async function(knex) {
         table.string("description").notNullable()
         table.integer("price").notNullable()
         table.blob("image_url").notNullable()
-        table.time("timer_length")
+        table.integer("timer_length")
         table.boolean("itemState")
         table.timestamp('recorded_on').defaultTo(knex.fn.now());
     })

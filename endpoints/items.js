@@ -11,4 +11,13 @@ router.get("/items", async (req, res, next) =>{
     }
 })
 
+router.get('/items/:id', async (req, res, next)=>{
+    try{
+        res.json(await db.getById(req.params.id))
+    } catch(err){
+        next(err)
+    }
+})
+
+
 module.exports = router;
