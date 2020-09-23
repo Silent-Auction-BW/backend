@@ -15,7 +15,7 @@ async function addItem(id, item){
     return db('items').
     insert({
         seller_id: id,
-        name: item.name,
+        item_name: item.item_name,
         description: item.description,
         price: item.price,
         image_url: item.image_url,
