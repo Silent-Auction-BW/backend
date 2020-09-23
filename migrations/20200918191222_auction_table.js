@@ -18,8 +18,9 @@ exports.up = async function(knex) {
         table.string("description").notNullable()
         table.integer("price").notNullable()
         table.blob("image_url").notNullable()
-        table.integer("timer_length")
-        table.boolean("itemState")
+        table.integer("timer_length").notNullable()
+        table.integer("timer").notNullable()
+        table.boolean("itemState").notNullable()
         table.timestamp('recorded_on').defaultTo(knex.fn.now());
     })
     await knex.schema.createTable("offers", (table) => {

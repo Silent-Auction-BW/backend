@@ -19,6 +19,9 @@ async function addItem(id, item){
         description: item.description,
         price: item.price,
         image_url: item.image_url,
+        timer_length: item.timer_length,
+        timer: item.timer,
+        itemState: item.itemState,
     })
 }
 

@@ -8,7 +8,7 @@ async function getAll(){
 async function getById(item_id) {
     return await db.table('items as i')
     .where('i.item_id', item_id)
-    .select('i.item_id', 'i.item_name', 'i.seller_id', 'i.description', 'i.price', 'i.timer_length', 'i.image_url', 'i.recorded_on')
+    .select('i.item_id', 'i.item_name', 'i.seller_id', 'i.description', 'i.price', 'i.timer_length', 'i.image_url', 'i.recorded_on', 'i.timer', 'i.itemState')
   }
 function update(id, changes) {
     return db('items')
