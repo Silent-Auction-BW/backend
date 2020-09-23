@@ -23,8 +23,11 @@ async function addItem(id, item){
 
     })
 }
+
+
 module.exports = {
     getAll,
     getById,
-    addItem
+    addItem,
+
 }
