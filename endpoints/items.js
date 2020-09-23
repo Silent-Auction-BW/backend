@@ -11,7 +11,7 @@ router.get("/items", async (req, res, next) =>{
     }
 })
 
-router.delete("items/:id", async (req,res,next) =>{
+router.delete("/items/:id", async (req,res,next) =>{
     db.remove(req.params.id).then((item) =>{
         if(item){
             res.status(200).json(item)
