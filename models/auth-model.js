@@ -1,3 +1,4 @@
+const { select } = require("../database/config")
 // const bcrypt = require("bcryptjs")
 
 const db = require("../database/config")
@@ -16,6 +17,24 @@ async function add(user) {
 	}
 }
 
+async function findRole(filter, role) {
+	const seller = await db.table('sellers as s')
+	.where(filter)
+	.select('s.seller_id')
+	.first()
+
+	const bidder = await db.table('bidders as s')
+	.where(filter)
+	.select('s.bidder_id')
+	.first()
+
+	if (!bidder){
+		return  {...seller, role: role}
+	}
+	else {
+		return  {...bidder, role: role}
+	}
+}
 
 
 async function findBy(filter) {
@@ -63,6 +82,7 @@ async function findById(bidder_id, seller_id, role) {
 
 module.exports = {
 	add,
+	findRole,
 	findBy,
 	findById,
 }

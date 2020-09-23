@@ -14,11 +14,13 @@ exports.up = async function(knex) {
     await knex.schema.createTable("items", (table) => {
         table.increments("item_id")
         table.integer("seller_id").notNullable().references("seller_id").inTable("sellers").onDelete("CASCADE").onUpdate("CASCADE")
-        table.string("name").notNullable()
+        table.string("item_name").notNullable()
         table.string("description").notNullable()
         table.integer("price").notNullable()
-        table.blob("image_url")
-        table.time("timer")
+        table.blob("image_url").notNullable()
+        table.time("timer_length")
+        table.boolean("itemState")
+        table.timestamp('recorded_on').defaultTo(knex.fn.now());
     })
     await knex.schema.createTable("offers", (table) => {
         table.integer("item_id").notNullable().references("item_id").inTable("items").onDelete("CASCADE").onUpdate("CASCADE")
