@@ -8,7 +8,7 @@ async function getAll(){
 
 async function getById(id){
     return await db.table('sellers as s')
-    .where('s.id', id)
+    .where('s.seller_id', id)
 
 }
 async function addItem(id, item){
@@ -19,8 +19,6 @@ async function addItem(id, item){
         description: item.description,
         price: item.price,
         image_url: item.image_url,
-        timer: item.timer
-
     })
 }
 

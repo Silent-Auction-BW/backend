@@ -35,9 +35,12 @@ router.post("/login", async (req, res, next) => {
 		}
 		
 
-		res.json({
-			message: `Welcome ${user.username} you role is ${user.role}! `,
-		})
+		// res.json({
+		// 	message: `Welcome ${user.username} you role is ${user.role}! `,
+		// })
+
+		res.status(201).json(await Users.findRole(req.body))
+
 	} catch(err) {
 		next(err)
 	}
