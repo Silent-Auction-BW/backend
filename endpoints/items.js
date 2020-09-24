@@ -11,6 +11,16 @@ router.get("/items", async (req, res, next) =>{
     }
 })
 
+router.get("/items/:id" , async(req,res,next) =>{
+    try{
+        const { id } = req.params
+        res.json( await db.getById(id))
+
+    } catch(err) {
+        next(err)
+    }
+})
+
 router.delete("/items/:id", async (req,res,next) =>{
     db.remove(req.params.id).then((item) =>{
         if(item){
