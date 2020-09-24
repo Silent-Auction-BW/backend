@@ -15,19 +15,29 @@ function update(id, changes) {
       .where('item_id', id )
       .update(changes);
   }
-
- 
-  
   function remove(id) {
     return db('items')
       .where('item_id', id)
       .del();
   }
+  async function addOffer(id, offer){
+
+    const itemId = id[0]
+    const bidder_id = id[1]
+
+    return db('offers').
+    insert({
+        item_id: id.id,
+        bidder_id: id.bidder_id,
+        ammount: offer.ammount
+    })
+}
 
 module.exports = {
     getAll,
     update,
     remove,
-    getById
+    getById,
+    addOffer
     
 };
