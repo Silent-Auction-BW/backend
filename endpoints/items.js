@@ -11,7 +11,7 @@ router.get("/items", async (req, res, next) =>{
     }
 })
 
-router.delete("items/:id", async (req,res,next) =>{
+router.delete("/items/:id", async (req,res,next) =>{
     db.remove(req.params.id).then((item) =>{
         if(item){
             res.status(200).json(item)
@@ -25,6 +25,17 @@ router.delete("items/:id", async (req,res,next) =>{
             message: "Error Database",
           });
     })
+})
+
+router.put("/items/:id", async (req,res,next)=>{
+    try {
+        const { id } = req.params
+        const changes = await db.update(id, req.body)
+        res.status(200).json(changes)
+
+    } catch(err) {
+        next(err)
+    }
 })
 
 module.exports = router;
