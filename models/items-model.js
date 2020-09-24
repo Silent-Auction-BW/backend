@@ -12,9 +12,11 @@ async function getById(item_id) {
   }
 function update(id, changes) {
     return db('items')
-      .where({ id })
+      .where('item_id', id )
       .update(changes);
   }
+
+ 
   
   function remove(id) {
     return db('items')
