@@ -14,7 +14,7 @@ exports.seed = function(knex) {
         description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
         timer_length: 1500,
         timer: 100000 ,
-        itemState: 'true'
+        itemState: true
       },
         { 
           item_id : 2,
@@ -25,7 +25,7 @@ exports.seed = function(knex) {
         description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
         timer_length: 1500 ,
         timer: 100000 ,
-        itemState: 'true'},
+        itemState: true},
         {  item_id : 3,
           seller_id: 1,
           item_name: 'William',
@@ -34,7 +34,7 @@ exports.seed = function(knex) {
         description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
         timer_length: 1500,
         timer: 100000,
-        itemState: 'true' },
+        itemState: true },
         { 
           item_id : 4,
           seller_id: 2,
@@ -44,7 +44,7 @@ exports.seed = function(knex) {
         description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
         timer_length: 1500,
         timer: 100000,
-        itemState: 'true'},
+        itemState: true},
         {  item_id : 5,
           seller_id: 1,
           item_name: 'William',
@@ -53,7 +53,7 @@ exports.seed = function(knex) {
         description: 'Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data Markup Data ',
         timer_length: 1500,
         timer: 100000,
-        itemState: 'false' },
+        itemState: false },
 
       ]);
     });

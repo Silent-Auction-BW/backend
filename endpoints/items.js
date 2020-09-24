@@ -11,14 +11,6 @@ router.get("/items", async (req, res, next) =>{
     }
 })
 
-router.get('/items/:id', async (req, res, next)=>{
-    try{
-        res.json(await db.getById(req.params.id))
-    } catch(err){
-        next(err)
-    }
-})
-
 router.delete("items/:id", async (req,res,next) =>{
     db.remove(req.params.id).then((item) =>{
         if(item){
@@ -34,8 +26,5 @@ router.delete("items/:id", async (req,res,next) =>{
           });
     })
 })
-
-module.exports = router;
-
 
 module.exports = router;
