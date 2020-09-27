@@ -1,12 +1,12 @@
 const router = require('express').Router();
-// const bcrypt = require('bcryptjs')
-// const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 const Users = require('../models/auth-model')
-
+const restrict = require("../middleware/auth-middleware")
 
 router.post('/register', async (req, res, next) => {
     try{
-        const {username} = req.body
+        const {username,password,role} = req.body
         const name = await Users.findBy({username})
   
         if (name){
@@ -14,13 +14,20 @@ router.post('/register', async (req, res, next) => {
               message: "User is already taken"
           })
         }
-        res.status(201).json(await Users.add(req.body))
+		const newUser = await Users.add({
+			username,
+			// hash the password with a time complexity of "14"
+			password: await bcrypt.hash(password, 14),
+			role
+		})
 
-    }
-    catch(err){
-      next(err)
-    }
+		res.status(201).json(newUser)
+	} catch(err) {
+		next(err)
+	}
+  // implement registration
 });
+
 
 
 router.post("/login", async (req, res, next) => {
@@ -35,52 +42,40 @@ router.post("/login", async (req, res, next) => {
 		}
 		
 
-		// res.json({
-		// 	message: `Welcome ${user.username} you role is ${user.role}! `,
-		// })
+		const passwordValid = await bcrypt.compare(password, user.password)
 
-		res.status(201).json(await Users.findRole(req.body))
-
-	} catch(err) {
+		if (!passwordValid) {
+		  return res.status(401).json({
+			message: 'You shall not pass!!',
+		  })
+		}
+	
+		const payload = {
+		  userId: user.id,
+		  username: user.username,
+		  userRole: user.role,
+		}
+	
+		res.cookie('token', jwt.sign(payload, 'safe'))
+		res.json({
+		  message: `Welcome ${user.username}! your role is ${user.role}`,
+		 
+		})
+	  } catch (err) {
 		next(err)
-	}
-})
+	  }
+	})
+	
 
-// router.post('/login', async (req, res, next) => {
-//    console.log('this is the request', req)
-//    const authError = {
-//       message: "Invalid Credentials"
-//    }
-//    const {name} = req.body  
-//    try{
-//       const userData = await Users.findBy({name})
-
-//         if (!userData){
-//           return res.status(401).json(authError)
-//       }
-//       console.log(req.body.password, userData.password)
-//       const passwordValid = await bcrypt.compare(req.body.password, userData.password)
-//       console.log(passwordValid)
-//         if (!passwordValid){
-//             return res.status(401).json(authError)
-//         }
-
-//       const tokenPayload = {
-//           userId: userData.id,
-//           userName: userData.name,
-//           userRole: userData.role
-//       }
-      
-//       const token = jwt.sign(tokenPayload, process.env.JWT_SECRET) 
-//       res.json({
-//           message: `Welcome ${userData.name}!`,
-//           token: token
-//       })
-//    }
-//    catch(err){
-//      next(err)
-//    }
-// });
+	router.get("/bidders", async (req,res,next)=>{
+		try{
+		  res.json(await Users.find())
+		}catch(err){
+			next(err)
+		}
+	  })
+	  
+	  
 
 
 module.exports = router;
