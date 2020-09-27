@@ -80,9 +80,18 @@ async function findById(bidder_id, seller_id, role) {
 	}
 }
 
+
+function find() {
+	return db("bidders").select( "username")
+}
+
+
+
 module.exports = {
 	add,
 	findRole,
 	findBy,
 	findById,
+	find
+	
 }
